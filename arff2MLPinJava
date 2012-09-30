@@ -3,7 +3,7 @@
 
 linha=0
 coluna=0
-sed '0,/@data/ d' $1 | while read line ;
+sed '0,/@[dD][aA][tT][aA]/ d' $1 | while read line ;
 do
 	line=`echo $line | sed '{
   		s/ //g
