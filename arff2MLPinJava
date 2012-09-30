@@ -1,0 +1,27 @@
+#!/bin/bash
+# Modo de uso: ./arff2MLPinJava "arquivo.arff" <númeroDeAtributos>
+
+linha=0
+coluna=0
+sed '0,/@data/ d' $1 | while read line ;
+do
+	line=`echo $line | sed '{
+  		s/ //g
+		s/\t//g
+	'}`
+	
+	while [ $coluna -lt $2 ] ;
+	do
+		line=`echo $line | sed "{
+			s/\([a-zA-Z0-9][a-zA-Z0-9\.]*\),/trainInputs[$linha][$coluna] = \1;/
+ 			s/;\([a-zA-Z0-9][a-zA-Z0-9\-]*\)$/;trainOutput[$linha] = \1;/
+		}"`
+		
+		coluna=$((coluna+1)) ;
+	done
+	
+	echo $line | sed 's/;/;\n/g'
+	
+	coluna=0
+	linha=$((linha+1)) ;
+done

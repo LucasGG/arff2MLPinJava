@@ -1,0 +1,87 @@
+Testado em: Linux (kernel 3.2)
+Programas necessários (além do bash):
+- sed
+
+Modo de uso: ./arff2MLPinJava "arquivo.arff" <número de instâncias>
+
+Logo após fazer a conversão do arquivo arff, é necessário utilizar um programa de substituição de textos para substituir qualquer valor que não seja numérico real para numérico real.
+
+Exemplo: ./arff2MLPinJava teste 5
+
+Nesse exemplo é necessário substituir o valor "Iris-setosa" por um valor numérico real.
+Entrada:
+
+...
+@data
+   5.1,3.5,1.4,0.2,Iris-setosa
+   4.9,3.0,1.4,0.2,Iris-setosa
+   4.7,3.2,1.3,0.2,Iris-setosa
+   4.6,3.1,1.5,0.2,Iris-setosa
+   5.0,3.6,1.4,0.2,Iris-setosa
+   5.4,3.9,1.7,0.4,Iris-setosa
+   4.6,3.4,1.4,0.3,Iris-setosa
+   5.0,3.4,1.5,0.2,Iris-setosa
+   4.4,2.9,1.4,0.2,Iris-setosa
+   4.9,3.1,1.5,0.1,Iris-setosa
+
+Saída:
+
+trainInputs[0][0] = 5.1;
+trainInputs[0][1] = 3.5;
+trainInputs[0][2] = 1.4;
+trainInputs[0][3] = 0.2;
+trainOutput[0] = Iris-setosa;
+
+trainInputs[1][0] = 4.9;
+trainInputs[1][1] = 3.0;
+trainInputs[1][2] = 1.4;
+trainInputs[1][3] = 0.2;
+trainOutput[1] = Iris-setosa;
+
+trainInputs[2][0] = 4.7;
+trainInputs[2][1] = 3.2;
+trainInputs[2][2] = 1.3;
+trainInputs[2][3] = 0.2;
+trainOutput[2] = Iris-setosa;
+
+trainInputs[3][0] = 4.6;
+trainInputs[3][1] = 3.1;
+trainInputs[3][2] = 1.5;
+trainInputs[3][3] = 0.2;
+trainOutput[3] = Iris-setosa;
+
+trainInputs[4][0] = 5.0;
+trainInputs[4][1] = 3.6;
+trainInputs[4][2] = 1.4;
+trainInputs[4][3] = 0.2;
+trainOutput[4] = Iris-setosa;
+
+trainInputs[5][0] = 5.4;
+trainInputs[5][1] = 3.9;
+trainInputs[5][2] = 1.7;
+trainInputs[5][3] = 0.4;
+trainOutput[5] = Iris-setosa;
+
+trainInputs[6][0] = 4.6;
+trainInputs[6][1] = 3.4;
+trainInputs[6][2] = 1.4;
+trainInputs[6][3] = 0.3;
+trainOutput[6] = Iris-setosa;
+
+trainInputs[7][0] = 5.0;
+trainInputs[7][1] = 3.4;
+trainInputs[7][2] = 1.5;
+trainInputs[7][3] = 0.2;
+trainOutput[7] = Iris-setosa;
+
+trainInputs[8][0] = 4.4;
+trainInputs[8][1] = 2.9;
+trainInputs[8][2] = 1.4;
+trainInputs[8][3] = 0.2;
+trainOutput[8] = Iris-setosa;
+
+trainInputs[9][0] = 4.9;
+trainInputs[9][1] = 3.1;
+trainInputs[9][2] = 1.5;
+trainInputs[9][3] = 0.1;
+trainOutput[9] = Iris-setosa;
