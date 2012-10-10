@@ -1,6 +1,6 @@
 /*
-MLP neural network in Java
-by Phil Brierley
+MLP em Java
+por Phil Brierley
 www.philbrierley.com
 
 This code may be freely used and modified at will
@@ -12,7 +12,7 @@ To include an input bias create an
 extra input in the training data
 and set to 1
 
-Routines included:
+Rotinas incluidas:
 
 calcNet()
 WeightChangesHO()
@@ -23,7 +23,7 @@ tanh(double x)
 displayResults()
 calcOverallError()
 
-compiled and tested on
+compilado e testado no
 Symantec Cafe Lite
 
 */
@@ -34,10 +34,10 @@ public class MLPinJava
 {
 
  //user defineable variables
- public static int numEpochs = 500; //number of training cycles
- public static int numInputs  = 3; //number of inputs - this includes the input bias
- public static int numHidden  = 4; //number of hidden units
- public static int numPatterns = 4; //number of training patterns
+ public static int numEpochs = 500; // Número de ciclos de treinamento.
+ public static int numInputs  = 3; // Número de entradas (incluindo BIAS).
+ public static int numHidden  = 4; // Número de unidades ocultas.
+ public static int numPatterns = 4; // Número de exemplos para treinamento.
  public static double LR_IH = 0.7; //learning rate
  public static double LR_HO = 0.07; //learning rate
 
@@ -60,7 +60,7 @@ public class MLPinJava
 
 
 //==============================================================
-//********** THIS IS THE MAIN PROGRAM **************************
+//********** ESTE É O MÉTODO PRINCIPAL *************************
 //==============================================================
 
  public static void main(String[] args)
@@ -69,16 +69,12 @@ public class MLPinJava
   //initiate the weights
   initWeights();
 
-  //load in the data
+  // Carrega os dados.
   initData();
 
-  //train the network
-    for(int j = 0;j <= numEpochs;j++)
-    {
-
-        for(int i = 0;i<numPatterns;i++)
-        {
-
+  // Treina a rede neural.
+  for(int j = 0;j <= numEpochs;j++) {
+    for(int i = 0;i<numPatterns;i++) {
             //select a pattern at random
             patNum = (int)((Math.random()*numPatterns)-0.001);
 
@@ -89,18 +85,17 @@ public class MLPinJava
             //change network weights
             WeightChangesHO();
             WeightChangesIH();
-        }
+      }
 
         //display the overall network error
         //after each epoch
         calcOverallError();
         System.out.println("epoch = " + j + "  RMS Error = " + RMSerror);
+  }
 
-    }
-
-    //training has finished
-    //display the results
-    displayResults();
+   //training has finished
+   //display the results
+  displayResults();
 
  }
 
@@ -194,7 +189,7 @@ public static void calcNet()
  public static void initData()
  {
 
-    System.out.println("initialising data");
+    System.out.println("Inicializando dados...");
 
     // the data here is the XOR data
     // it has been rescaled to the range
