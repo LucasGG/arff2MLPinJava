@@ -27,9 +27,13 @@ public class MLPemJava {
 	static int numExemplo;
 	static double erroExAtual;
 	static double outPred;
-	static double RMSerror;
 	static double weightChange;
-
+	// Variáveis para processamento de erro.
+	static double erroMedioAb;
+	static double erroMedioRel;
+	static double RMSAberror;
+	static double RMSRelerror;
+	
 	// Matriz e vetor para conjunto de dados para entrada e saída.
 	static double[][] trainInputs = new double[numExemplos][numEntradas];
 	static double[] trainOutput = new double[numExemplos];
@@ -51,8 +55,10 @@ public class MLPemJava {
 		// Carrega os dados.
 		iniciarDados();
 
+		System.out.println("Inicializando treinamento...");
+
 		// Treina a rede neural.
-		for (int j = 0; j <= numCiclos; j++) {
+		for (int j = 0; j <= numCiclos; j++)
 			for (int i = 0; i < numExemplos; i++) {
 				// Seleciona um exemplo randômico.
 				numExemplo = (int) ((Math.random() * numExemplos) - 0.001);
@@ -68,13 +74,13 @@ public class MLPemJava {
 				WeightChangesIH();
 			}
 
-			// Calcula o erro geral da rede após cada época.
-			calcOverallError();
-			System.out.println("Ciclo: " + j + "\tErro RMS = " + RMSerror);
-		}
+		System.out.println("Treinamento finalizado.");
 
-		// Mostra todos os resultados.
-		mostrarResultados();
+		// Calcula e mostra todos os resultados.
+		calcOverallError();
+		System.out.println("Erro médio absoluto: " + erroMedioAb
+				+ "\nRMS absoluto: " + RMSAberror + "\nErro médio relativo: "
+				+ erroMedioRel + "\nRMS Relativo: " + RMSRelerror);
 	}
 
 	static void iniciarPesos() {
@@ -123,7 +129,7 @@ public class MLPemJava {
 				hiddenVal[i] += (trainInputs[numExemplo][j] * pesosEntrada[j][i]);
 
 			hiddenVal[i] = Math.tanh(hiddenVal[i]);
-			
+
 			// Regularização da entrada.
 			if (hiddenVal[i] > 20)
 				hiddenVal[i] = 1;
@@ -166,24 +172,25 @@ public class MLPemJava {
 	}
 
 	static void calcOverallError() {
-		RMSerror = 0.0;
+		erroMedioAb = 0.0;
+		RMSAberror = 0.0;
+		erroMedioRel = 0.0;
+		RMSRelerror = 0.0;
 
 		for (int i = 0; i < numExemplos; i++) {
 			numExemplo = i;
+
 			calcRede();
-			RMSerror += (erroExAtual * erroExAtual);
+			
+			erroMedioAb += erroExAtual;
+			RMSAberror += (erroExAtual * erroExAtual);
+			erroMedioRel += (erroExAtual) / trainOutput[numExemplo];
+			RMSRelerror += (erroExAtual * erroExAtual) / trainOutput[numExemplo];
 		}
 
-		RMSerror = Math.sqrt(RMSerror / numExemplos);
-	}
-
-	static void mostrarResultados() {
-		for (int i = 0; i < numExemplos; i++) {
-			numExemplo = i;
-			calcRede();
-
-			System.out.println("Exemplo = " + (numExemplo + 1) + "\tactual = "
-					+ trainOutput[numExemplo] + "\tneural model = " + outPred);
-		}
+		erroMedioAb /= numExemplos;
+		RMSAberror = Math.sqrt(RMSAberror / numExemplos);
+		erroMedioRel /= numExemplos;
+		RMSRelerror = Math.sqrt(RMSRelerror / numExemplos);
 	}
 }
