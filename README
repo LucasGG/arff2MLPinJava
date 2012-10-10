@@ -4,8 +4,7 @@ Programas necessários:
 
 Modo de uso: ./arff2MLPinJava "arquivo.arff" <número de instâncias>
 
-Logo após fazer a conversão do arquivo arff, é necessário utilizar um programa de substituição de textos para 
-substituir qualquer valor que não seja numérico real para numérico real.
+Logo após fazer a conversão do arquivo arff, é necessário utilizar um programa de substituição de textos para substituir qualquer valor que não seja numérico real para numérico real.
 
 Exemplo: ./arff2MLPinJava teste 5
 
