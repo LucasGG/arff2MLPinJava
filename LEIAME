@@ -1,5 +1,5 @@
 Testado em: Linux (kernel 3.2)
-Programas necessários (além do bash):
+Programas necessários:
 - sed
 
 Modo de uso: ./arff2MLPinJava "arquivo.arff" <número de instâncias>
